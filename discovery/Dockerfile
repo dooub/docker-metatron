@@ -2,7 +2,7 @@
 FROM airdock/oraclejdk:1.8
 
 ARG METATRON_TAG
-ENV METATRON_TAG ${METATRON_TAG}
+ENV METATRON_TAG 3.3.0-rc3
 ADD metatron-discovery-${METATRON_TAG}-bin.tar.gz /
 RUN ln -sf /metatron-discovery-* /discovery
 COPY metatron.sh /discovery/bin/metatron.sh
