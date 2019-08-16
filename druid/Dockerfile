@@ -7,7 +7,7 @@ RUN tar xvfp /druid-0.9.1-latest-hadoop-2.7.3-bin.tar.gz
 RUN ln -sf /${DRUID_VERSION} /druid
 ADD start-single-foreground.sh /druid
 RUN rm -rf /druid/conf/
-COPY conf_origin /druid/
+ADD conf_origin /druid/
 
 # Add Tini
 ENV TINI_VERSION v0.18.0
