@@ -1,10 +1,7 @@
 #!/bin/bash -eu
 
-export METATRON_CONFIG_DIRECTORY=conf
-export METATRON_CONFIG_DIRECTORY_ORIGIN=conf_origin
-
-if [[ ! -e ${METATRON_CONFIG_DIRECTORY}/druid ]]; then
-    mkdir ${METATRON_CONFIG_DIRECTORY}
+if [[ ! -e conf/druid ]]; then
+    mkdir conf
     cp -R conf_origin/* conf/
 fi
 

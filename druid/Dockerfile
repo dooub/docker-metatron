@@ -15,4 +15,4 @@ RUN chmod +x /tini
 ENTRYPOINT ["/tini", "--"]
 WORKDIR "/druid"
 # Run your program under Tini
-CMD ["./start-single-foreground.sh", "zookeeper", "coordinator", "broker", "historical", "middleManager", "overlord", "router"]
+CMD ["./start-single-foreground.sh", "zookeeper", "router", "coordinator", "broker", "historical", "middleManager", "overlord"]
