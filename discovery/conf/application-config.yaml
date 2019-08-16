@@ -16,12 +16,12 @@ polaris:
       overlord: http://druid:8090
       coordinator: http://druid:8081
     ingestion:
-      baseDir: /tmp
+      baseDir: /mnt/nvme/ingest
       hosts:
-        "[test.com]":
+        "[172.22.10.112]":
           port: 22
-          username: abc
-          password: test
+          username: ingester
+          password: cjenm-pip-!
     query:
       localResultDir: ${java.io.tmpdir:-/tmp}
       defaultForwardUrl: local:/tmp
