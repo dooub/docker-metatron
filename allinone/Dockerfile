@@ -2,8 +2,7 @@ FROM centos:7
 
 RUN TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` &&     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.rpm" > tini.rpm &&     rpm -Uvh tini.rpm &&     rm tini.rpm
 RUN yum -y update   && yum clean all   && yum update -y libselinux   && yum -y install systemd
-RUN yum clean all;   (cd /lib/systemd/system/sysinit.target.wants/;   for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);   rm -f /lib/systemd/system/multi-user.target.wants/*;   rm -f /etc/systemd/system/*.wants/*;   rm -f /lib/systemd/system/local-fs.target.wants/*;   rm -f /lib/systemd/system/sockets.target.wants/*udev*;   rm -f /lib/systemd/system/sockets.target.wants/*initctl*;   rm -f /lib/systemd/system/basic.target.wants/*;
-   rm -f /lib/systemd/system/anaconda.target.wants/*;
+RUN yum clean all;   (cd /lib/systemd/system/sysinit.target.wants/;   for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);   rm -f /lib/systemd/system/multi-user.target.wants/*;   rm -f /etc/systemd/system/*.wants/*;   rm -f /lib/systemd/system/local-fs.target.wants/*;   rm -f /lib/systemd/system/sockets.target.wants/*udev*;   rm -f /lib/systemd/system/sockets.target.wants/*initctl*;   rm -f /lib/systemd/system/basic.target.wants/*;  rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 RUN yum install -y epel-release
 RUN rpm -ivh https://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
@@ -30,7 +29,7 @@ ENV METATRON_DB_TYPE=mysql
 
 ADD metatron-discovery-${METATRON_TAG}-bin.tar.gz /usr/local/
 #/bin/sh -c wget -qO- ${DISCOVERY_DOWNLOAD} | tar xvz -C /usr/local/ &&     
-RUN DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && 
+RUN DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
     ln -s ${DISCOVERY_PACKAGE_PATH} ${DISCOVERY_HOME}
 
 VOLUME [/usr/local/mysql-backup]
