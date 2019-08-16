@@ -1,7 +1,9 @@
 #!/bin/bash -eu
 
 if [[ ! -e conf/druid ]]; then
-    mkdir conf
+    if [[ ! -e conf ]]; then
+        mkdir conf
+    fi
     cp -R conf_origin/* conf/
 fi
 
