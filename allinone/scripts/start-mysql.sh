@@ -2,6 +2,7 @@
 if [ -d "/usr/local/mysql-backup/mysql" ]; then
     echo "mysql data exists!!"
     if [ -L "/var/lib/mysql" ]; then
+        echo "not writing"
     else
         rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 #        /usr/sbin/mysqld --initialize-insecure --datadir=/var/lib/mysql --user=root
@@ -11,7 +12,7 @@ if [ -d "/usr/local/mysql-backup/mysql" ]; then
         echo "character-set-server = utf8" >> /etc/my.cnf
         echo "skip-character-set-client-handshake" >> /etc/my.cnf
         date > /usr/local/mysql-backup/version
-    elif
+    fi
     /usr/sbin/mysqld --user=root
 else
     echo "mysql data doesn't exists!!"
