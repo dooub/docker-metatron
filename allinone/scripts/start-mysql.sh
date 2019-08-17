@@ -3,6 +3,8 @@ if [ -d "/usr/local/mysql-backup/mysql" ]; then
     echo "mysql data exists!!"
     if [ -L "/var/lib/mysql" ]; then
         echo "not writing"
+        rm -rf /var/lib/mysql/mysql.sock
+        rm -rf /var/lib/mysql/mysql.sock.lock
     else
         rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 #        /usr/sbin/mysqld --initialize-insecure --datadir=/var/lib/mysql --user=root
