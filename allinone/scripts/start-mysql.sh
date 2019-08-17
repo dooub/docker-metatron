@@ -6,7 +6,7 @@ if [ -d "/usr/local/mysql-backup/mysql" ]; then
         rm -rf /var/lib/mysql/mysql.sock
         rm -rf /var/lib/mysql/mysql.sock.lock
     else
-        rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
+        rm -rf /var/lib/mysql
 #        /usr/sbin/mysqld --initialize-insecure --datadir=/var/lib/mysql --user=root
         ln -s /usr/local/mysql-backup /var/lib/mysql
         rm -rf /var/lib/mysql/mysql.sock
