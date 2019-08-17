@@ -19,17 +19,17 @@ RUN curl -s ${ZOOKEEPER_MIRROR_DOWNLOAD} | tar -xz -C /usr/local/ &&     cd /usr
 ADD ./scripts /usr/local/scripts
 
 ENV DRUID_HOME=/usr/local/druid
-ARG DRUID_DOWNLOAD=https://github.com/metatron-app/metatron-discovery/releases/download/3.2.6/druid-metatron-3.2.6.tar.gz
-#https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/druid-0.9.1-latest-hadoop-2.7.3-bin.tar.gz
+#ARG DRUID_DOWNLOAD=https://github.com/metatron-app/metatron-discovery/releases/download/3.2.6/druid-metatron-3.2.6.tar.gz
+ARG DRUID_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/druid-0.9.1-latest-hadoop-2.7.3-bin.tar.gz
 
 RUN wget -qO- ${DRUID_DOWNLOAD} | tar xvz -C /usr/local/ && DRUID_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "druid*") && ln -s ${DRUID_PACKAGE_PATH} ${DRUID_HOME} && echo -e "#/bin/bash\nexport HADOOP_VERSION=$(find /usr/local/druid/hadoop-dependencies/hadoop-client -maxdepth 1 -printf '%P')" > /etc/profile.d/druid.sh
 
 ENV DISCOVERY_HOME=/usr/local/metatron-discovery
 ENV METATRON_DB_TYPE=mysql
-ARG DISCOVERY_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/metatron-discovery-latest-bin.tar.gz
-#ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
-RUN wget -qO- ${DISCOVERY_DOWNLOAD} | tar xvz -C /usr/local/ && \
-    DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
+#ARG DISCOVERY_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/metatron-discovery-latest-bin.tar.gz
+ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
+#RUN wget -qO- ${DISCOVERY_DOWNLOAD} | tar xvz -C /usr/local/ && \
+RUN  DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
     ln -s ${DISCOVERY_PACKAGE_PATH} ${DISCOVERY_HOME}
 
 VOLUME /usr/local/mysql-backup
