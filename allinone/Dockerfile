@@ -25,11 +25,10 @@ RUN wget -qO- ${DRUID_DOWNLOAD} | tar xvz -C /usr/local/ && DRUID_PACKAGE_PATH=$
 
 ENV DISCOVERY_HOME=/usr/local/metatron-discovery
 ENV METATRON_DB_TYPE=mysql
-#ARG DISCOVERY_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/metatron-discovery-latest-bin.tar.gz
-
-ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
-#/bin/sh -c wget -qO- ${DISCOVERY_DOWNLOAD} | tar xvz -C /usr/local/ &&     
-RUN DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
+ARG DISCOVERY_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/metatron-discovery-latest-bin.tar.gz
+#ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
+RUN wget -qO- ${DISCOVERY_DOWNLOAD} | tar xvz -C /usr/local/ && \
+    DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
     ln -s ${DISCOVERY_PACKAGE_PATH} ${DISCOVERY_HOME}
 
 VOLUME /usr/local/mysql-backup
