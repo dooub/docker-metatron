@@ -36,7 +36,7 @@ VOLUME /usr/local/mysql-backup
 VOLUME /usr/local/druid-backup
 VOLUME /usr/local/druid/logs
 VOLUME /usr/local/druid/tmp
-VOLUME /usr/local/druid/var
+#VOLUME /usr/local/druid/var
 VOLUME /usr/local/metatron-discovery/logs
 
 EXPOSE 8180
