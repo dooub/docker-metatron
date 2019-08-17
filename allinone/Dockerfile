@@ -32,12 +32,11 @@ ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
 RUN DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
     ln -s ${DISCOVERY_PACKAGE_PATH} ${DISCOVERY_HOME}
 
-VOLUME [/usr/local/mysql-backup]
-VOLUME [/usr/local/druid-backup]
-VOLUME [/usr/local/druid/logs]
-VOLUME [/usr/local/druid/tmp]
-VOLUME [/usr/local/druid]
-VOLUME [/usr/local/metatron-discovery/logs]
+VOLUME /usr/local/mysql-backup
+VOLUME /usr/local/druid-backup
+VOLUME /usr/local/druid/logs
+VOLUME /usr/local/druid/tmp
+VOLUME /usr/local/metatron-discovery/logs
 
 EXPOSE 8180
 EXPOSE 8091
