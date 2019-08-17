@@ -8,7 +8,9 @@ if [ -d "/usr/local/mysql-backup/mysql" ]; then
     else
         rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 #        /usr/sbin/mysqld --initialize-insecure --datadir=/var/lib/mysql --user=root
-        rm -rf /var/lib/mysql && ln -s /usr/local/mysql-backup /var/lib/mysql
+        ln -s /usr/local/mysql-backup /var/lib/mysql
+        rm -rf /var/lib/mysql/mysql.sock
+        rm -rf /var/lib/mysql/mysql.sock.lock
         echo "explicit_defaults_for_timestamp = 1" >> /etc/my.cnf
         echo "collation-server = utf8_unicode_ci" >> /etc/my.cnf
         echo "character-set-server = utf8" >> /etc/my.cnf
