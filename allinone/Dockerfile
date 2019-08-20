@@ -23,8 +23,8 @@ ENV DRUID_HOME=/usr/local/druid
 ARG DRUID_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/druid-0.9.1-latest-hadoop-2.7.3-bin.tar.gz
 
 RUN wget -qO- ${DRUID_DOWNLOAD} | tar xvz -C /usr/local/ && DRUID_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "druid*") && ln -s ${DRUID_PACKAGE_PATH} ${DRUID_HOME} && echo -e "#/bin/bash\nexport HADOOP_VERSION=$(find /usr/local/druid/hadoop-dependencies/hadoop-client -maxdepth 1 -printf '%P')" > /etc/profile.d/druid.sh
-COPY ./druid_config/historical/runtime.properties /usr/local/druid/conf/historical/runtime.properties
-COPY ./druid_config/historical/jvm.config /usr/local/druid/conf/historical/jvm.config
+COPY ./druid_config/historical/runtime.properties /usr/local/druid/conf/druid/historical/runtime.properties
+COPY ./druid_config/historical/jvm.config /usr/local/druid/conf/druid/historical/jvm.config
 
 ENV DISCOVERY_HOME=/usr/local/metatron-discovery
 ENV METATRON_DB_TYPE=mysql
