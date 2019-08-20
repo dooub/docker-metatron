@@ -34,10 +34,22 @@ ADD metatron-discovery-3.3.0-rc3-bin.tar.gz /usr/local/
 RUN  DISCOVERY_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "metatron-discovery*") && \
     ln -s ${DISCOVERY_PACKAGE_PATH} ${DISCOVERY_HOME}
 
+
+ENV GEOSERVER_HOME "/usr/local/geoserver"
+ENV GEOSERVER_DATA_DIR "/usr/local/geoserver-data"
+ARG GEOSERVER_DOWNLOAD=https://sktmetatronkrsouthshared.blob.core.windows.net/metatron-public/discovery-dist/latest/geoserver-metatron-latest.tar.gz
+RUN wget -qO- ${GEOSERVER_DOWNLOAD} | tar xvz -C /usr/local/ && GEOSERVER_PACKAGE_PATH=$(find /usr/local -maxdepth 1 -name "geoserver*") && ln -s ${GEOSERVER_PACKAGE_PATH} ${GEOSERVER_HOME}
+
+RUN curl -o /usr/local/geoserver-metatron-latest.tar.gz 
+ENV GEOSERVER_VERSION "geoserver-metatron-3.1.0"
+RUN tar xfp /geoserver-metatron-latest.tar.gz
+RUN ln -sf /${GEOSERVER_VERSION} /geoserver && mkdir -p ${GEOSERVER_DATA_DIR}
+
 VOLUME /usr/local/mysql-backup
 VOLUME /usr/local/druid-backup
 VOLUME /usr/local/druid/logs
 VOLUME /usr/local/druid/tmp
+VOLUME /usr/local/geoserver-data
 #VOLUME /usr/local/druid/var
 VOLUME /usr/local/metatron-discovery/logs
 
